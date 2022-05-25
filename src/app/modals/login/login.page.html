@@ -1,0 +1,39 @@
+<ion-app>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="flex-full">
+      <div (click)="close()"><ion-icon name="arrow-back-outline"></ion-icon></div>
+      <div>  <ion-title class="font-mont">Login</ion-title></div>
+        <div class=""></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<div class="animate__animated">
+<ion-list lines="none">
+<ion-item>
+  <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">Email:</ion-label>
+  <div class="center-flex">
+    <ion-icon name="person" class="ion-text-start font-native"></ion-icon>
+  <ion-input type="text" placeholder="@ | 123" [(ngModel)]="data.user.user" class="font-mont" class="font-native">
+  </ion-input>
+  </div>
+  </ion-item>
+
+            <ion-item>
+              <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">Password</ion-label>
+              <div class="center-flex">
+                <ion-icon name="key" class="ion-text-start font-native"></ion-icon>
+              <ion-input type="password" placeholder="******" [(ngModel)]="data.user.password" class="font-mont" class="font-native">
+              </ion-input>
+              </div>
+              </ion-item>
+        </ion-list>
+          <ion-button expand="full" size="medium" (click)="submit()">Proceed</ion-button>
+          <p class="align-center" (click)="signup()">Sign up!</p>
+</div>
+</ion-content>
+
+</ion-app>

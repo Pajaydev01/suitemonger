@@ -1,0 +1,71 @@
+<ion-content>
+  <div class="animate__animated" *ngIf="type=='selfie'" >
+<!-- handles selfie -->
+<div class="">
+<h1 class="font-nic font-mid align-center">Let's start with a selfie</h1>
+<p class="font-mont font-small align-center">Proceed to take a selfie showing your face clearly for analysis as we kickstart your verification</p>
+  <ion-list lines="none">
+    <ion-item><a class="button-lg align-center font-mont font-low" (click)="takeSelfie()">Take a selfie</a></ion-item>
+    </ion-list>
+</div>
+
+<div class="center-flex">
+  <img id="img" alt=""/>
+</div>
+</div>
+
+<div class="" class="animate__animated" *ngIf="type=='phone'" >
+  <!-- handles text -->
+<h1 class="font-nic font-mid align-center">Making progress!!</h1>
+<p class="font-mont font-small align-center">Please enter your phone number for verification</p>
+
+  <ion-list lines="none">
+    <ion-item>
+      <ion-input type='number' [(ngModel)]="data['phone']" placeholder="e.g +234 90 ...."></ion-input>
+      </ion-item>
+    <ion-item><a class="button-lg align-center font-mont font-low" (click)="v_phone()">Verify phone</a></ion-item>
+    </ion-list>
+</div>
+
+<div class="" class="animate__animated" *ngIf="type=='id_num'">
+  <!-- collect national id here -->
+
+  <h1 class="font-nic font-mid align-center">Almost there</h1>
+  <p class="font-mont font-small align-center">Please enter your national Identity number</p>
+
+    <ion-list lines="none">
+      <ion-item>
+        <ion-input type='number' [(ngModel)]="data['id']"  placeholder="e.g 12345"></ion-input>
+        </ion-item>
+      <ion-item><a class="button-lg align-center font-mont font-low" (click)="save_id()">Proceed</a></ion-item>
+      </ion-list>
+</div>
+
+<div class="animate__animated" *ngIf="type=='id_snap'" >
+<!-- handles national id snapping here -->
+<div class="">
+<h1 class="font-nic font-mid align-center">The last one!</h1>
+<p class="font-mont font-small align-center">Proceed to take a picture of your national identity slip</p>
+<ion-list lines="none">
+  <ion-item><a class="button-lg align-center font-mont font-low" (click)="takePass()">Take picture</a></ion-item>
+  </ion-list>
+</div>
+<!-- <div class="center-flex">
+<img id="img2" alt=""/>
+</div> -->
+</div>
+
+<div class="animate__animated" *ngIf="type=='v_sms'" >
+<!-- handles national id snapping here -->
+<div class="">
+<p class="font-mont font-small align-center">Please provide the 4 digit code sent to your number</p>
+<ion-list lines="none">
+  <ion-item>
+    <ion-input type='number' [(ngModel)]="data['sms']"  placeholder="e.g 1234"></ion-input>
+    </ion-item>
+
+  <ion-item><a class="button-lg align-center font-mont font-low" (click)="verify()">Verify</a></ion-item>
+  </ion-list>
+</div>
+</div>
+</ion-content>

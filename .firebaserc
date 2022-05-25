@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "practice-ee96c": {
+      "hosting": {
+        "app": [
+          "practice-ee96c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "practice-ee96c"
+  }
+}

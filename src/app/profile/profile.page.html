@@ -1,0 +1,74 @@
+<ion-header>
+<ion-toolbar>
+  <ion-buttons>
+    <ion-back-button defaultHref="home"></ion-back-button>
+    <ion-title class="font-mont">Profile</ion-title>
+    <ion-text slot="end" *ngIf="data.loading===false" class="font-mont font-small mg-r">Account status: <span><strong>{{setStat(data.stat)}}</strong></span></ion-text>
+      </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <input type="file" accept=".png,.jpg" name="" id="image" style="display: none;" (change)="add_image($event)">
+  <div class="center-grid p-g animate__animated">
+<div class="" (click)="pickSingleImage()" [ngStyle]="{'background-image': 'url('+data?.user?.avatar_link+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center','background-size':'cover', 'width':'200px', 'height':'200px', 'border-radius':'15px'}">
+</div>
+<p class="font-mont font-small align-center">click to change your profile picture</p>
+</div>
+
+<div class="animate__animated">
+  <ion-list lines="none">
+  <ion-item>
+    <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">First name:</ion-label>
+    <div class="center-flex">
+      <ion-icon name="person" class="ion-text-start font-native"></ion-icon>
+    <ion-input type="text" placeholder="e.g John..." [(ngModel)]="data.user.firstname" class="font-mont" class="font-native">
+    </ion-input>
+    </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">Other names:</ion-label>
+      <div class="center-flex">
+        <ion-icon name="person" class="ion-text-start font-native"></ion-icon>
+      <ion-input type="text" placeholder="e.g John Doe..." [(ngModel)]="data.user.othername" class="font-mont" class="font-native">
+      </ion-input>
+      </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">Email Address:</ion-label>
+        <div class="center-flex">
+          <ion-icon name="mail" class="ion-text-start font-native"></ion-icon>
+        <ion-input type="email" placeholder="e.g @yourmail.com" [(ngModel)]="data.user.email" class="font-mont" class="font-native">
+        </ion-input>
+        </div>
+        </ion-item>
+
+          <ion-item>
+            <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">Phone:</ion-label>
+            <div class="center-flex">
+              <ion-icon name="phone-portrait" class="ion-text-start font-native"></ion-icon>
+            <ion-input type="number" placeholder="e.g +123***" [(ngModel)]="data.user.phone" class="font-mont" class="font-native">
+            </ion-input>
+            </div>
+            </ion-item>
+
+            <ion-item><a class="button-lg align-center font-mont font-low" (click)="update('details')">Update</a></ion-item>
+          </ion-list>
+</div>
+
+<!-- check for profile verification here -->
+
+<div class="center-flex animate__animate" *ngIf="data.loading">
+<div class="loading"></div>
+</div>
+
+<div class="" *ngIf="data.loading==false && data.stat==0" >
+  <p class="align-center font-mont"><strong>Dear {{data.user.firstname}}</strong></p>
+  <p class="align-center font-small">Kindly proceed to verify your account to make full use of this platform</p>
+  <div class="">
+    <ion-button expand="full" color="light" (click)="openVerify()">Proceed</ion-button>
+  </div>
+</div>
+</ion-content>

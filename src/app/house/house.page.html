@@ -1,0 +1,125 @@
+<ion-app >
+  <ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="home"></ion-back-button><ion-title class="font-mont">Details</ion-title>
+      <ion-button class="font-mont font-small" size="small" slot="end" *ngIf="data.dateTime!==undefined" (click)="saveBooking()">Save booking</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div *ngIf="!data?.loading" >
+<div class="animate__animated">
+  <ion-slides [options]="slider.slideOpts" pager="true">
+        <ion-slide *ngFor="let item of data?.result?.images">
+
+    <div class="half-slide center-grid" [ngStyle]="{'background-image': 'url('+item+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center','background-size':'cover', 'width':'90%', 'height':'300px', 'border-radius':'17px'}">
+  </div>
+    </ion-slide>
+  </ion-slides>
+</div>
+<div class="padding-lr-sm">
+<div class="flex-full margin-y-rm animate__animated">
+  <h1 class="font-mont font-low"><strong>{{data?.result?.name}}</strong></h1>
+  <p> <ion-icon name="heart"></ion-icon><span class="font-mont font-low">{{data?.result?.likes}}</span></p>
+</div>
+<div class="animate__animated">
+<p><ion-icon name="location"></ion-icon><span class="font-mont font-low">{{data?.result?.address}}</span></p>
+</div>
+<div class="animate__animated">
+  <h1 class="font-nic"><strong>Description</strong></h1>
+  <p class="font-mont font-low">{{data?.result?.information}}</p>
+</div>
+<div class="animate__animated">
+  <h1 class="font-nic align-center">Available Suites<br><span class="font-small font-mont">CLICK ON ANY BELOW TO PROCEED</span></h1>
+
+  <ion-slides pager="false" [options]="slider.slideOpts_ordinary">
+        <ion-slide *ngFor="let item of data?.result?.prices  let i = index;" (click)="price(item,i)">
+          <div class="grid">
+    <div class="half-slide center-grid" [ngStyle]="{'background-image': 'url('+item.images[0]+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center','background-size':'cover', 'width':'90px', 'height':'90px', 'border-radius':'5px'}">
+  </div>
+  <div>
+  <p class="font-mont font-small">{{item.category}}</p>
+  </div>
+  <div class="" *ngIf="data.count==i" >
+    <ion-icon name="caret-up"></ion-icon>
+  </div>
+  </div>
+    </ion-slide>
+  </ion-slides>
+</div>
+
+<!-- use this to display the selected price range -->
+<div class="" *ngIf="data?.user?.prices?.length==1">
+  <div class="animate__animated">
+    <p class="font-mont font-low align-center"><strong>Selected Suite: {{data?.user?.prices[0]?.category}}</strong></p>
+  </div>
+  <ion-slides [options]="slider.slideOpts" pager="true">
+        <ion-slide *ngFor="let item of data?.user?.prices[0]?.images">
+
+    <div class="half-slide center-grid animate__animated" [ngStyle]="{'background-image': 'url('+item+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center','background-size':'cover', 'width':'90%', 'height':'250px', 'border-radius':'17px'}">
+  </div>
+    </ion-slide>
+  </ion-slides>
+  <p class="font-mont align-center animate__animated"><strong>{{data?.user?.prices[0]?.price |currency: data?.result?.currency:'symbol-narrow'}} Per  {{data?.user?.prices[0]?.charge_per}} day(s)</strong></p>
+  <div>
+<div class="font-mont animate__animated font-low align-center">
+Available space: {{(data?.user?.prices[0]?.spaces)-(data?.user?.prices[0]?.occupied)}}   of {{(data?.user?.prices[0]?.spaces)}}
+</div>
+<div class="font-mont animate__animate">
+    <p class="font-small align-center"><strong>Select number of days:</strong></p>
+  <div class="flex-full">
+  <ion-button  size="large" (click)="editCount('-')">-</ion-button>
+<div class="font-native font-big">{{data?.user?.counter}}</div>
+  <ion-button size="large" (click)="editCount('+')">+</ion-button>
+  </div>
+  </div>
+  <div class="font-mont animate__animated">
+    <p class="font-small align-center"><strong>Select number of Suites: </strong></p>
+    <div class="flex-full">
+    <ion-button size="large"  (click)="editSuite('-')">-</ion-button>
+  <div class="font-native font-big">{{data?.user?.suiteCount}}</div>
+    <ion-button size="large" (click)="editSuite('+')">+</ion-button>
+    </div>
+    </div>
+    <div class="font-mont" *ngIf="data.dateTime!==undefined" >
+      <p class="align-center font-small"><strong>Scheduled Date: {{data?.user?.day}} | Scheduled Time: {{data?.user?.time}}</strong></p>
+    </div>
+    <div class="center-flex">
+    <ion-button id="open-modal" color="light">Select lodge Day/time</ion-button>
+        </div>
+<ion-modal trigger="open-modal" class="search-modal">
+  <ng-template>
+    <ion-content>
+      <ion-datetime  (ionChange)="confirm($event)">
+      </ion-datetime>
+      <div class="flex-full">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+      <ion-button color="light" (click)="proceed()">Proceed</ion-button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+</div>
+
+</div>
+</div>
+</div>
+<div class="center-flex" *ngIf="data.loading">
+  <div class="loading">
+  </div>
+</div>
+</ion-content>
+<ion-footer class="ion-no-border animate__animated footer" *ngIf="data?.user?.prices?.length==1">
+  <ion-toolbar *ngIf="data.dateTime!==undefined" >
+    <ion-button expand='full' class="font-mont" *ngIf="(data?.user?.prices[0]?.spaces)-(data?.user?.prices[0]?.occupied)>0">
+      Book {{data?.user?.total | currency: data?.result?.currency:'symbol-narrow'}}
+      </ion-button>
+
+      <div class="font-mont font-small align-center" *ngIf="(data?.user?.prices[0]?.spaces)-(data?.user?.prices[0]?.occupied) == 0" disable=true>
+      Not Available for booking
+        </div>
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>

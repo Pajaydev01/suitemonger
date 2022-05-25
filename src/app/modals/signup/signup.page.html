@@ -1,0 +1,75 @@
+<ion-app>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="flex-full">
+      <div (click)="close()"><ion-icon name="arrow-back-outline"></ion-icon></div>
+      <div>  <ion-title class="font-mont">Signup</ion-title></div>
+        <div class=""></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<div class="animate__animated">
+<ion-list lines="none">
+<ion-item>
+  <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">First name:</ion-label>
+  <div class="center-flex">
+    <ion-icon name="person" class="ion-text-start font-native"></ion-icon>
+  <ion-input type="text" placeholder="e.g John..." [(ngModel)]="data.user.firstname" class="font-mont" class="font-native">
+  </ion-input>
+  </div>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">Other names:</ion-label>
+    <div class="center-flex">
+      <ion-icon name="person" class="ion-text-start font-native"></ion-icon>
+    <ion-input type="text" placeholder="e.g John Doe..." [(ngModel)]="data.user.othername" class="font-mont" class="font-native">
+    </ion-input>
+    </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">Email Address:</ion-label>
+      <div class="center-flex">
+        <ion-icon name="mail" class="ion-text-start font-native"></ion-icon>
+      <ion-input type="email" placeholder="e.g @yourmail.com" [(ngModel)]="data.user.email" class="font-mont" class="font-native">
+      </ion-input>
+      </div>
+      </ion-item>
+
+        <ion-item>
+          <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">Phone:</ion-label>
+          <div class="center-flex">
+            <ion-icon name="phone-portrait" class="ion-text-start font-native"></ion-icon>
+          <ion-input type="number" placeholder="e.g +123***" [(ngModel)]="data.user.phone" class="font-mont" class="font-native">
+          </ion-input>
+          </div>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">Choose password</ion-label>
+            <div class="center-flex">
+              <ion-icon name="key" class="ion-text-start font-native"></ion-icon>
+            <ion-input type="password" placeholder="......" [(ngModel)]="data.user.pass1" class="font-mont" class="font-native">
+            </ion-input>
+            </div>
+            </ion-item>
+
+            <ion-item>
+              <ion-label class="font-mont font-native font-small label" position="stacked" color="dark">Confirm password</ion-label>
+              <div class="center-flex">
+                <ion-icon name="key" class="ion-text-start font-native"></ion-icon>
+              <ion-input type="password" placeholder="......" [(ngModel)]="data.user.password" class="font-mont" class="font-native">
+              </ion-input>
+              </div>
+              </ion-item>
+        </ion-list>
+          <ion-button expand="full" size="medium" (click)="submit()">Proceed</ion-button>
+          <p class="align-center" (click)="login( )">Go to Sign in</p>
+</div>
+</ion-content>
+
+</ion-app>

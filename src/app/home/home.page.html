@@ -1,0 +1,279 @@
+<ion-app>
+  <!-- side menu -->
+  <ion-menu side="start" menuId="first" contentId="main">
+  <ion-header class="ion-no-border">
+    <ion-toolbar class="menu-header">
+      <ion-title>
+        <div class="center-grid p-g" (click)="action.navigate('forward','/profile')">
+    <div class="" [ngStyle]="{'background-image': 'url('+data?.user?.avatar_link+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center','background-size':'cover', 'width':'80px', 'height':'80px', 'border-radius':'15px'}">
+    </div>
+      </div>
+    <div><h2 class="font-low align-center">{{data?.user?.firstname}} {{data?.user?.othername}}</h2></div>
+
+    </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item (click)="action.navigate('forward','/profile')"><ion-icon name="person-outline"></ion-icon>&nbsp; &nbsp; Profile</ion-item>
+      <ion-item><ion-icon name="wallet-outline"></ion-icon>&nbsp; &nbsp; Wallet & Earnings</ion-item>
+      <ion-item (click)="action.navigate('forward','/bookings')"><ion-icon name="bookmarks-outline"></ion-icon>&nbsp; &nbsp; My bookings</ion-item>
+      <ion-item><ion-icon name="reader-outline"></ion-icon>&nbsp; &nbsp; Terms</ion-item>
+      <ion-item><ion-icon name="chatbubble-ellipses-outline"></ion-icon>&nbsp; &nbsp; Faqs</ion-item>
+      <ion-item (click)="logout()"><ion-icon name="arrow-back-outline"></ion-icon>&nbsp; &nbsp; Logout</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+  <ion-router-outlet id="main" ></ion-router-outlet>
+
+<ion-header [translucent]="true" class="ion-no-border" *ngIf="data.active">
+  <ion-toolbar>
+    <ion-title>
+      <div class="flex-full">
+    <div>
+<ion-icon name="menu-outline" class="font-native" (click)="onclick=openMenu('first')"></ion-icon>
+</div>
+<div>
+<ion-icon name="notifications-outline" class="font-native"></ion-icon><sub class="font-small">1</sub>
+</div>
+</div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+
+
+  <div class="margin-y-rm  animate__animated">
+  <ion-slides pager="false" [options]="slide.slideOpts4">
+        <ion-slide *ngFor="let item of data.slides">
+
+    <div class="half-slide center-grid" [ngStyle]="{'background-image': 'url('+item.image+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center','background-size':'cover', 'width':'100%', 'height':'300px'}">
+  <div>
+<div class="align-center">
+  <h1 class="font-big font-tinos">{{item.text}}</h1>
+</div>
+<span class="center-flex"><span *ngIf="item.line" class="small_line"></span></span>
+<p class="font-low font-mont padding-lr-sm">{{item.short}}</p>
+<div *ngIf="!data.active" class="center-flex"><ion-button *ngIf="item.button" size="medium" shape="round" (click)="signup()">{{item.bText}}</ion-button> &nbsp; &nbsp; <ion-button *ngIf="item.button" size="medium" shape="round" (click)="login()" color="light">Sign in</ion-button></div>
+</div>
+    </div>
+        </ion-slide>
+      </ion-slides>
+      </div>
+
+<div *ngIf="data.success">
+      <div class="bg-white animate__animated">
+        <div class="align-center font-nic font-mid margin-y-rm">
+        <p>House Categories</p>
+        </div>
+    <!-- this is category section and should be loaded from online -->
+    <div class=" h-r">
+    <ion-slides pager="false" [options]="slide.slideOpts_ordinary">
+          <ion-slide *ngFor="let item of data.categories" (click)="goCart(item)">
+            <div class="">
+      <p><ion-icon name="business-outline" class="font-mid"></ion-icon><br>
+      <span class="font-low">{{item.name}}</span></p>
+            </div>
+          </ion-slide>
+        </ion-slides>
+        </div>
+
+        <!-- search pane here -->
+        <div class="center-flex p-g">
+        <div class="bg-native search-bar center-flex" (click)="search()">
+          <!-- <div><ion-icon name="search-outline"></ion-icon></div> -->
+          <div><p class="font-low font-mont">Search for anything</p></div>
+        </div>
+        </div>
+         <!-- <div class="center-flex" (click)="search()">
+        <div class="search">Search anything</div>
+        </div> -->
+      </div>
+
+      <!-- house of the week based on votes -->
+      <div class="wrap voted">
+  <img class="imgs"
+    class="bg"
+    src="../../assets/icon/medal.svg"
+    alt=""
+  >
+  <div class="align-center content animate__animated">
+  <h2 class="font-nic font-mid margin-y-sm">
+Houses of Week
+  </h2>
+  <i class="font-small">Pick from the best voted and enjoy the splendour</i>
+  </div>
+
+<!-- the houses here -->
+<ion-row class="animate__animated">
+                   <ion-col class="" size="6" *ngFor="let item of data.favorite" (click)="house(item)">
+                     <ion-card>
+                         <div class="center-flex">
+                              <img class="imgs" src="{{item?.images[0]}}" />
+                              </div>
+                              <ion-card-header>
+                                <ion-card-subtitle class="font-mont font-small">Location: {{item.address}}</ion-card-subtitle>
+                                <ion-card-title class="font-mont font-small"><strong>{{item.name}}</strong></ion-card-title>
+                              </ion-card-header>
+                              <ion-card-content>
+                                <div class="font-mont font-low">
+                                 {{ (item.short_desc.length>15)? (item.short_desc | slice:0:15)+'..':(item.short_desc) }}
+                                </div>
+                                <div class="">
+                                  <ion-icon name="heart"></ion-icon> {{item.likes}}
+                                </div>
+                              </ion-card-content>
+                            </ion-card>
+
+                          </ion-col>
+       </ion-row>
+
+
+</div>
+<div class="bg-white">
+<!-- houses near your here -->
+<div class="align-center content animate__animated">
+<h2 class="font-nic font-mid margin-y-sm">
+Apartments near you
+</h2>
+<i class="font-small">Looking for an apartment close to you? no worries</i>
+</div>
+<div class="font-mont font-low font-native flex-full padding-lr-sm" *ngIf="data?.appartment">
+  <div class=""> </div>
+  <div class=""></div>
+  <p><strong>VIEW ALL</strong></p>
+</div>
+      <div class="scroll-x">
+        <div class="scroll_container">
+        <ion-card *ngFor="let item of data?.house" [ngClass]="(item?.distance<data.settings[0].distance && item?.category===2)?'':'visible'" (click)="house(item)" class="list_inner">
+            <div class="center-flex">
+                 <img class="imgs" src="{{item?.images[0]}}" />
+                 </div>
+                 <ion-card-header>
+                   <ion-card-subtitle class="font-small">{{item.name}}</ion-card-subtitle >
+                 </ion-card-header>
+               </ion-card>
+               </div>
+      </div>
+
+      <div class="font-mont align-center font-native font-small" *ngIf="!data.appartment">
+        <p>Sorry there are currently no appartments near you here, don't worry as soon as are you close to one, they'll appear here</p>
+      </div>
+</div>
+
+<div class="bg-white">
+<!-- houses near your here -->
+<div class="align-center content animate__animated">
+<h2 class="font-nic font-mid margin-y-sm">
+Hotels near you
+</h2>
+<i class="font-small">Get the best hotels nearby with comfort</i>
+</div>
+<div class="font-mont font-low font-native flex-full padding-lr-sm" *ngIf="data?.hotel">
+  <div class=""> </div>
+  <div class=""></div>
+  <p><strong>VIEW ALL</strong></p>
+</div>
+<div class="scroll-x">
+  <div class="scroll_container">
+  <ion-card *ngFor="let item of data?.house" [ngClass]="(item?.distance<data.settings[0].distance && item?.category===20)?'':'visible'" (click)="house(item)" class="list_inner">
+      <div class="center-flex">
+           <img class="imgs" src="{{item?.images[0]}}" />
+           </div>
+           <ion-card-header>
+             <ion-card-subtitle class="font-small">{{item.name}}</ion-card-subtitle >
+           </ion-card-header>
+         </ion-card>
+         </div>
+</div>
+
+      <div class="font-mont align-center font-native font-small" *ngIf="!data.hotel">
+        <p>Sorry there are currently no hotels near you here, don't worry as soon as are you close to one, they'll appear here</p>
+      </div>
+</div>
+</div>
+
+
+<!-- error here -->
+<div *ngIf="data.err" class="ion-padding animate__animated">
+  <div class="center-grid">
+      <h4 class="align-center font-nic">
+        Sorry, we encountered a network error
+      </h4>
+
+      <ion-button (click)="loader()">
+        Try again
+        </ion-button>
+  </div>
+</div>
+
+
+<!-- Skeleton screen -->
+<div *ngIf="data.loading">
+  <div class="ion-padding custom-skeleton">
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    <ion-skeleton-text animated></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+  </div>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+      </ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-skeleton-text animated style="width: 27px; height: 27px" slot="start"></ion-skeleton-text>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+</ion-content>
+</ion-app>
