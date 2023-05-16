@@ -1,0 +1,8 @@
+{
+  "name": "Suitemonger",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

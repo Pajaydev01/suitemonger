@@ -1,0 +1,28 @@
+<ion-app>
+<ion-header>
+<ion-toolbar>
+  <div class="flex-full">
+  <ion-buttons>
+    <ion-back-button defaultHref="home"></ion-back-button>
+          <p class="font-mont font-native font-small align-center">Drag the marker to your destination to proceed</p>
+      </ion-buttons>
+        <ion-button color="light" (click)="loadSearch()">Enter address</ion-button>
+        </div>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="" id="map"></div>
+</ion-content>
+<ion-footer class="ion-no-border animate__animated footer" *ngIf="data.lat!==undefined">
+  <ion-toolbar>
+    <ion-list lines="none">
+    <div class="align-center center-flex">
+      <div class="button-lg" (click)="proceed()">
+Proceed to use this points
+      </div>
+    </div>
+      </ion-list>
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>

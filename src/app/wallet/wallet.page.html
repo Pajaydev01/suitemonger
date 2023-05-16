@@ -1,0 +1,46 @@
+<ion-app>
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-title class="font-mont">Wallet</ion-title>
+    </ion-buttons>
+
+    <ion-text class="font-mont" slot="end">
+      <ion-button (click)="topup()" color="light">Top up</ion-button>
+    </ion-text>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment (ionChange)="segmentChanged($event)" color="medium" value="0" #segment>
+  <ion-segment-button value="0">
+    <ion-label>Wallet</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="1">
+    <ion-label>Earned</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<div *ngIf="data.loading==false && data.segment==0"  class="animate__animated">
+  <div class="center-flex font-nic animate__animated">
+    <h1>Your Balance</h1>
+  </div>
+<div class="center-flex animate__animated">
+  <h1 class="font-mont"><strong>{{data?.balance | currency: 'NGN':'symbol-narrow'}}</strong></h1>
+</div>
+
+<ion-list lines="none">
+  <ion-item class="animate__animated"><a class="button-lg align-center font-mont font-low" (click)="transactions()">Transactions</a></ion-item>
+  </ion-list>
+</div>
+
+<div class="" *ngIf="data.loading==false && data.segment==1"  class="animate__animated">
+<p class="font-mont font-fade font-low align-center">Coming soon...</p>
+</div>
+<div class="center-flex" *ngIf="data.loading" >
+  <div class="loading">
+  </div>
+</div>
+</ion-content>
+</ion-app>

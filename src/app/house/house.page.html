@@ -1,0 +1,267 @@
+<ion-app >
+  <ion-header class="ion-no-border animate__animated" mode="md" *ngIf="!data.active">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="home"></ion-back-button><ion-title class="font-mont">Details</ion-title>
+      <!-- <ion-button class="font-mont font-small" size="small" slot="end" *ngIf="data.dateTime!==undefined" (click)="saveBooking()">Save booking</ion-button> -->
+
+      <div class="button-lg-wh align-center" (click)="saveBooking()" slot="end" *ngIf="data.dateTime!==undefined" (click)="saveBooking()">Save booking</div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="!data?.loading" class="animate__animated">
+<div>
+  <p class="font-mont font-small align-center">Kindly take a video and photo tour of the entire apartment listing below to for a view of where you are booking</p>
+  <!-- slider here for video and images -->
+  <ng-image-slider [images]="data.res" #nav (imageClick)="suber()" (lightboxClose)="data.active=false"></ng-image-slider>
+</div>
+<div class="padding-lr-sm">
+<div class="flex-full ">
+  <h1 class="font-tinos font-low"><strong>{{data?.result?.name}}</strong></h1>
+  <p> <ion-icon name="heart"></ion-icon><span class="font-mont font-low">{{data?.result?.likes}}</span></p>
+</div>
+<div class=" flex-full">
+<div><span class="font-mont font-small">{{data?.result?.address}}</span>
+</div>
+<div>
+      <!-- <ion-button class="font-mont font-small" color="light" slot="end" size="small" (click)="openMap()">View in map</ion-button> -->
+      <div class="button-lg-wh" (click)="openMap()">Map</div>
+</div>
+</div>
+<div class="">
+  <h1 class="font-nic"><strong>Description</strong></h1>
+  <p class="font-mont font-low">{{data?.result?.information}}</p>
+</div>
+<p-divider></p-divider>
+<div class="">
+<h1 class="font-nic"><strong>Reviews</strong></h1>
+  <div class="scroll-x" *ngIf="data?.result?.review !=undefined" >
+    <div class="scroll_container">
+           <div *ngFor="let item of data?.result?.review; let i=index;" class="list_inner">
+            <p-chip (click)="review(item)" label="{{item.name}}" icon="pi pi-user"></p-chip>
+        </div>
+
+           </div>
+  </div>
+  <div class="" *ngIf="data?.result?.review==undefined" >
+    <p class="font-mont font-small font-fade">There are no reviews yet</p>
+  </div>
+</div>
+<p-divider></p-divider>
+
+<div>
+<p-accordion>
+  <p-accordionTab header="House rules">
+    <ng-container *ngIf="data?.result?.rules!=undefined">
+      <ion-list *ngFor="let item of data?.result?.rules" slot="content">
+        <ion-item class="font-native font-low font-mont">
+          <ion-icon name="alert-outline"></ion-icon> {{item}}
+        </ion-item>
+        </ion-list>
+      </ng-container>
+      <ng-container *ngIf="data?.result?.rules==undefined">
+      <ion-list slot="content">
+        <ion-item class="font-small font-native">
+          There are no rules, enjoy your stay
+          </ion-item>
+      </ion-list>
+      </ng-container>
+  </p-accordionTab>
+</p-accordion>
+</div>
+<p-divider></p-divider>
+<ion-item lines="none">
+  <a class="align-center button-lg font-mont font-low" (click)="showHost(data?.result?.company)">
+  Host details
+  </a>
+  </ion-item>
+<div class="">
+  <h1 class="font-nic align-center">Available categories<br><span class="font-small font-mont">CLICK ON ANY BELOW TO PROCEED</span></h1>
+
+  <ion-slides pager="false" [options]="slider.slideOpts_ordinary">
+        <ion-slide *ngFor="let item of data?.result?.prices  let i = index;" (click)="price(item,i)">
+          <div class="grid">
+    <div class="half-slide center-grid" [ngStyle]="{'background-image': 'url('+item.images[0]+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center','width':'90px', 'height':'90px', 'border-radius':'5px'}">
+  </div>
+  <div>
+  <p class="font-mont font-small">{{item.category}}</p>
+  </div>
+  <div class="" *ngIf="data.count==i" >
+    <ion-icon name="caret-up"></ion-icon>
+  </div>
+  </div>
+    </ion-slide>
+  </ion-slides>
+</div>
+
+<!-- use this to display the selected price range -->
+<div class="" *ngIf="data?.user?.prices?.length==1">
+  <div class="">
+    <p class="font-nic font-low align-center"><strong>Selected: {{data?.user?.prices[0]?.category}}</strong></p>
+  </div>
+  <ion-slides [options]="slider.slideOpts0" pager="true">
+        <ion-slide *ngFor="let item of data?.user?.prices[0]?.images" (click)="action.preview(data?.user?.prices[0]?.images,data?.user?.prices[0]?.category )">
+
+    <div class="half-slide center-grid " [ngStyle]="{'background-image': 'url('+item+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center', 'width':'90%', 'height':'250px', 'border-radius':'17px'}">
+  </div>
+    </ion-slide>
+  </ion-slides>
+  <div class="font-small align-center font-native">
+    <p>Click each houses features to drop them down</p>
+  </div>
+  <div class="font-mont font-low">
+
+<p-accordion>
+  <p-accordionTab header="Amenities">
+    <ng-container *ngIf="data?.user?.prices[0]?.amenities!=undefined">
+      <ion-list *ngFor="let item of data?.user?.prices[0]?.amenities" slot="content">
+        <ion-item class="font-native font-low font-mont">
+          <ion-icon name="ribbon-outline"></ion-icon> {{item}}
+        </ion-item>
+        </ion-list>
+      </ng-container>
+      <ng-container *ngIf="data?.user?.prices[0]?.amenities==undefined">
+      <ion-list slot="content">
+        <ion-item class="font-small font-native">
+          There are no amenities assigned to this properties, kindly contact the host for clarifications
+          </ion-item>
+      </ion-list>
+      </ng-container>
+  </p-accordionTab>
+
+  <p-accordionTab header="Cancellation policy">
+    <ng-container *ngIf="data?.user?.prices[0]?.cancellation!=undefined">
+      <ion-list *ngFor="let item of data?.user?.prices[0]?.cancellation" slot="content">
+        <ion-item class="font-native font-low font-mont">
+          <ion-icon name="document-text-outline"></ion-icon>48 hours and above to check in: {{item['48>']}}% refund
+        </ion-item>
+        <ion-item class="font-native font-low font-mont">
+          <ion-icon name="document-text-outline"></ion-icon>24 hours to check in: {{item['24>']}}% refund
+        </ion-item>
+        <ion-item class="font-native font-low font-mont">
+          <ion-icon name="document-text-outline"></ion-icon>Less than 24 hours to check in: {{item["<24"]}}% refund
+        </ion-item>
+        </ion-list>
+        </ng-container>
+        <ng-container *ngIf="data?.user?.prices[0]?.cancellation==undefined">
+        <ion-list slot="content">
+          <ion-item class="font-small font-native">
+            There are no cancellation policy assigned to this properties, kindly contact the host for clarifications
+            </ion-item>
+        </ion-list>
+        </ng-container>
+  </p-accordionTab>
+</p-accordion>
+  </div>
+  <p-divider></p-divider>
+  <div class="flex-full mg-b">
+    <div class="font-mont font-small"><strong>Minimum duration:</strong></div>
+    <div class="font-tinos">
+      <strong>{{data?.user?.prices[0]?.charge_per}} day(s)</strong>
+    </div>
+  </div>
+
+  <p-divider></p-divider>
+
+  <div class="flex-full s mg-b">
+<div class="font-mont font-small"><strong>Price per minimum duration</strong></div>
+<div class="font-tinos"><strong>{{data?.user?.prices[0]?.price |currency: data?.result?.currency:'symbol-narrow'}}</strong></div>
+  </div>
+
+  <p-divider></p-divider>
+
+  <div class="flex-full mg-b">
+<div class="font-mont font-small"><strong>Available space</strong></div>
+<div class="font-tinos"><strong>{{(data?.user?.prices[0]?.spaces)-(data?.user?.prices[0]?.occupied)}}</strong></div>
+  </div>
+
+  <p-divider></p-divider>
+
+
+  <div class="flex-full mg-b">
+    <div class="font-mont font-small"><strong>Listed space</strong></div>
+    <div class="font-tinos"><strong>{{(data?.user?.prices[0]?.spaces)}}</strong></div>
+      </div>
+
+      <p-divider></p-divider>
+
+  <div>
+
+<div class="font-mont  animate__animate">
+    <p class="font-small"><strong>Set number of days:</strong></p>
+  <div class="flex-full">
+  <!-- <ion-button  size="large" (click)="editCount('-')">-</ion-button> -->
+  <div class="button-sm align-center" (click)="editCount('-')">-</div>
+<div class="font-native font-big">{{data?.user?.counter}}</div>
+  <!-- <ion-button size="large" (click)="editCount('+')">+</ion-button> -->
+  <div class="button-sm align-center" (click)="editCount('+')">+</div>
+  </div>
+  </div>
+  <p-divider></p-divider>
+  <div class="font-mont">
+    <p class="font-small"><strong>Set number of spaces needed: </strong></p>
+    <div class="flex-full">
+    <!-- <ion-button size="large"  (click)="editSuite('-')">-</ion-button> -->
+    <div class="button-sm align-center" (click)="editSuite('-')">-</div>
+  <div class="font-native font-big">{{data?.user?.suiteCount}}</div>
+    <!-- <ion-button size="large" (click)="editSuite('+')">+</ion-button> -->
+    <div class="button-sm align-center" (click)="editSuite('+')">+</div>
+    </div>
+    </div>
+    <p-divider></p-divider>
+    <div class="font-mont" *ngIf="data.dateTime!==undefined" >
+      <p class="align-center font-small"><strong>Scheduled Date: {{data?.user?.day}} | Scheduled Time: {{data?.user?.time}}</strong></p>
+    </div>
+    <p class="font-mont font-small font-native align-center">Select lodge Day/time</p>
+    <div class="center-flex">
+    <!-- <ion-button id="open-modal" color="light">Select lodge Day/time</ion-button> -->
+    <!-- <div class="button-lg-wh align-center" id="open-modal" >Select lodge Day/time</div> -->
+    <p-calendar [(ngModel)]="data.dateTemp"  (onSelect)="confirm($event)" [showTime]="true" aria-label="Set date and time" ></p-calendar>
+        </div>
+        <div class="font-mont list-native" *ngIf="data?.result?.rules!=undefined">
+          <!-- <ion-list lines="none">
+        <ion-item>
+         <ion-label class="font-mont font-small font-native">I have read and will comply to the rules above</ion-label>
+         <ion-checkbox value='checked' [(ngModel)]="data.comply"></ion-checkbox>
+       </ion-item>
+
+       </ion-list> -->
+       <div class="center-flex">
+        <p class="font-pop font-small font-native m-g-r">I have read and will comply to the rules above</p>
+        <p-checkbox [binary]="true" inputId="binary" value='checked' [(ngModel)]="data.comply"></p-checkbox>
+       </div>
+        </div>
+<ion-modal trigger="open-modal" class="dateClass">
+  <ng-template>
+    <ion-content>
+      <div>
+      <ion-datetime  [(ngModel)]="data.dateTemp"  [showDefaultButtons]="true" [min]="data.today" mode="ios" (ionChange)="confirm($event)">
+      </ion-datetime>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+</div>
+
+</div>
+</div>
+</div>
+<div class="center-flex" *ngIf="data.loading">
+  <div class="loading">
+  </div>
+</div>
+</ion-content>
+<ion-footer class="ion-no-border  footer" *ngIf="data?.user?.prices?.length==1">
+  <ion-toolbar *ngIf="data.dateTime!==undefined" >
+    <!-- <ion-button expand='full' class="font-mont" *ngIf="(data?.user?.prices[0]?.spaces)-(data?.user?.prices[0]?.occupied)>0" (click)="proceed_book()">
+      Proceed
+      </ion-button> -->
+      <div class="button-lg align-center font-mont" *ngIf="(data?.user?.prices[0]?.spaces)-(data?.user?.prices[0]?.occupied)" (click)="proceed_book()">Proceed</div>
+
+      <div class="font-mont font-small align-center" *ngIf="(data?.user?.prices[0]?.spaces)-(data?.user?.prices[0]?.occupied) == 0" disable=true>
+      Not Available for booking
+        </div>
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>

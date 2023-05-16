@@ -1,0 +1,91 @@
+<ion-app >
+  <ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="home"></ion-back-button><ion-title class="font-mont">Booking Details</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div *ngIf="!data?.loading" >
+<div class="animate__animated">
+  <ion-slides [options]="slider.slideOpts0" pager="true">
+        <ion-slide *ngFor="let item of data?.result2?.images">
+
+    <div class="half-slide center-grid" [ngStyle]="{'background-image': 'url('+item+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center','width':'90%', 'height':'300px', 'border-radius':'17px'}">
+  </div>
+    </ion-slide>
+  </ion-slides>
+</div>
+<div class="padding-lr-sm">
+<div class="flex-full margin-y-rm animate__animated">
+  <h1 class="font-mont font-low"><strong>{{data?.result2?.name}}</strong></h1>
+  <p>
+    <!-- change the like icon color if the user is part of the likers array -->
+  <ion-icon name="heart" (click)="favorite()" *ngIf="!data.liked" ></ion-icon>
+    <ion-icon name="heart" (click)="unlike()" *ngIf="data.liked" class="red"></ion-icon>
+  <span class="font-mont font-low">{{data?.result2?.likes}}</span></p>
+</div>
+<div class="animate__animated">
+<p><ion-icon name="location"></ion-icon><span class="font-mont font-low">{{data?.result2?.address}}</span></p>
+</div>
+<div class="animate__animated">
+  <h1 class="font-nic"><strong>Description</strong></h1>
+  <p class="font-mont font-low">{{data?.result2?.information}}</p>
+</div>
+<!-- use this to display the selected price range -->
+<div class="" *ngIf="data?.user?.prices?.length==1">
+  <div class="animate__animated">
+    <p class="font-mont font-low align-center"><strong>Selected Suite: {{data?.user?.prices[0]?.category}}</strong></p>
+  </div>
+  <ion-slides [options]="slider.slideOpts0" pager="true">
+        <ion-slide *ngFor="let item of data?.user?.prices[0]?.images">
+
+    <div class="half-slide center-grid animate__animated" [ngStyle]="{'background-image': 'url('+item+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center', 'width':'90%', 'height':'250px', 'border-radius':'17px'}">
+  </div>
+    </ion-slide>
+  </ion-slides>
+  <p class="font-mont align-center animate__animated"><strong>{{data?.user?.prices[0]?.price |currency: data?.result?.currency:'symbol-narrow'}} Per  {{data?.user?.prices[0]?.charge_per}} day(s)</strong></p>
+  <div>
+<div class="font-mont animate__animate">
+    <p class="font-small align-center"><strong>Selected number of days:</strong></p>
+  <div class="align-center">
+<div class="font-native font-big">{{data?.user?.counter}}</div>
+  </div>
+  </div>
+  <div class="font-mont animate__animated">
+    <p class="font-small align-center"><strong>Selected number of Suites: </strong></p>
+    <div class="align-center">
+  <div class="font-native font-big">{{data?.user?.suiteCount}}</div>
+    </div>
+    </div>
+    <div class="font-mont" *ngIf="data.dateTime!==undefined" >
+      <p class="align-center font-small"><strong>Scheduled Date: {{data?.user?.day}} | Scheduled Time: {{data?.user?.time}}</strong></p>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+<div class="center-flex" *ngIf="data.loading">
+  <div class="loading">
+  </div>
+</div>
+</ion-content>
+<ion-footer class="ion-no-border animate__animated footer" *ngIf="data?.result?.status===0">
+  <ion-toolbar>
+    <ion-button expand='full' class="font-mont" (click)="cancel_book()">
+    Cancel booking {{data?.user?.total | currency: data?.result?.currency:'symbol-narrow'}}
+      </ion-button>
+    </ion-toolbar>
+  </ion-footer>
+
+  <ion-footer class="ion-no-border animate__animated footer" *ngIf="data?.result?.status===1">
+    <ion-toolbar>
+      <ion-button expand='full' class="font-mont" (click)="review()">
+    Leave a review
+        </ion-button>
+      </ion-toolbar>
+    </ion-footer>
+</ion-app>

@@ -1,0 +1,48 @@
+.grid{
+  display: grid;
+}
+.m-g-r{
+  margin-right: 10px;
+}
+.scroll-x {
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: auto;
+
+    .category {
+        display: inline-block;
+        margin: 0 3.5px;
+
+        .category_img {
+            width: 100px;
+            height: 127px;
+            border-radius: 11px;
+        }
+
+        &:first-child {
+            margin-left: 15px;
+        }
+
+        &:last-child {
+            margin-right: 15px;
+        }
+    }
+}
+.icon{
+  width: 22%;
+  height: 20px;
+  object-fit: contain;
+  border-radius: 20px;
+}
+.visible{
+  display: none;
+}
+.mg-b{
+  margin-bottom:10px;
+}
+.lines{
+  border-bottom: 0.3px solid grey;
+}
+.visible{
+  display: none;
+}

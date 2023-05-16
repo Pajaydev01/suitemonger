@@ -1,0 +1,49 @@
+<ion-app>
+<ion-header class="ion-no-border">
+<ion-toolbar>
+  <ion-buttons>
+    <ion-back-button defaultHref="home"></ion-back-button><ion-title class="font-mont">{{data.name}}</ion-title>
+  </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="center-flex" *ngIf="data.loading">
+  <div class="loading"></div>
+</div>
+<div class="" class="animate__animated" *ngIf="!data.loading" >
+  <!-- do the stuff here -->
+  <ion-row>
+                     <ion-col class="" size="6" *ngFor="let item of data?.result" (click)="goHouse(item)">
+                       <ion-card>
+                           <div class="center-flex">
+                                <img class="imgs" src="{{item?.images[0]}}" />
+                                </div>
+                                <ion-card-header>
+                                  <ion-card-subtitle class="font-mont font-small">Location: {{item.address}}</ion-card-subtitle>
+                                  <ion-card-title class="font-mont font-small"><strong>{{item.name}}</strong></ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content>
+                                  <div class="font-mont font-low">
+                                   {{ (item.short_desc.length>15)? (item.short_desc | slice:0:15)+'..':(item.short_desc) }}
+                                  </div>
+                                  <div class="">
+                                    <ion-icon name="heart"></ion-icon> {{item.likes}}
+                                  </div>
+                                </ion-card-content>
+                              </ion-card>
+
+                            </ion-col>
+         </ion-row>
+
+
+         <div class="font-mont font-low align-center" *ngIf="data?.result?.length===0">
+           <p>Sorry, there  are no houses available for the selected category</p>
+         </div>
+</div>
+<div class="font-mont align-center font-low" *ngIf="data.err" >
+<p>Sorry, we encountered an error, it's our fault, please go back and try again</p>
+</div>
+
+</ion-content>
+</ion-app>

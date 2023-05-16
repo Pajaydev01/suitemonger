@@ -1,0 +1,61 @@
+<ion-app>
+  <ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-header>
+
+
+<ion-content>
+  <div class="wrap">
+    <img class="imgs"
+      class="bg"
+      src="../../assets/icon/search-circle-outline.svg"
+      alt=""
+    >
+  <div *ngIf="data.isCat" >
+<div class="font-mont font-low animate__animated">
+  <i>Search results for {{data.input}}</i>
+  <p>Filtered under <i>{{data.type}}</i></p>
+</div>
+
+<div class="flex-under animate__animated" *ngIf="data.result.length!==0" >
+  <div class="border-round font-mont" *ngFor="let item of data.result" (click)="goCart(item)">
+    {{item.name}}<br>
+    <i class="font-small">click to view</i>
+  </div>
+</div>
+
+<div class="animate__animated" *ngIf="data.result.length==0">
+  <p class="font-mont font-small align-center">Sorry, there are no results for your search</p>
+</div>
+</div>
+
+<div *ngIf="data.isHouse">
+  <div class="font-mont font-low animate__animated">
+    <i>Search results for {{data.input}}</i>
+    <p>Filtered under <i>{{data.type}}</i></p>
+  </div>
+
+  <div class="flex-under animate__animated" *ngIf="data.result.length!==0" >
+    <div class="border-round font-mont" *ngFor="let item of data.result" (click)="goHouse(item)">
+      {{item.name}}<br>
+      <i class="font-small">click to view</i>
+    </div>
+  </div>
+
+  <div class="animate__animated" *ngIf="data.result.length==0">
+    <p class="font-mont font-small align-center">Sorry, there are no results for your search</p>
+  </div>
+
+</div>
+
+<div class="center-flex" *ngIf="this.data.loading" >
+  <div class="loading">
+  </div>
+</div>
+</div>
+</ion-content>
+</ion-app>

@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+<p class="font-mont font-native font-low align-center">Host/Owner Information</p>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="m-g" *ngIf="data.loading==false && data.empty==false">
+<div class="">
+  <div class="p-g animate__animated">
+<div class="" [ngStyle]="{'background-image': 'url('+data?.result?.logo+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center', 'width':'200px', 'height':'200px', 'border-radius':'15px'}">
+</div>
+</div>
+<div class="animate__animated">
+  <h1 class="font-mont font-low"><strong>{{data?.result?.name}}</strong></h1>
+  <p class="font-mont font-native"><ion-icon name="location"></ion-icon>{{data?.result?.address}}</p>
+  <div class="font-mont">
+  <div class=""><p><ion-icon name="chatbox-outline"></ion-icon><span>{{data?.result?.email}}</span></p></div>
+  <div class="">
+    <p><ion-icon name="phone-portrait-outline"></ion-icon><span>+234{{data?.result?.phone}}</span></p>
+  </div>
+  </div>
+  <div class="">
+  <h1 class="font-mont font-small font-native "><strong>About {{data?.result?.name}}</strong></h1>
+  <p class="font-mont font-low para">{{data?.result?.Details}}</p>
+  </div>
+</div>
+</div>
+</div>
+<!-- empty result -->
+<div class="" *ngIf="data.loading==false && data.empty==true" >
+<i class="font-mont font-native font-fade font-low align-center">Sorry, we are having troubles fetching information on the owners of this property, kindly check back</i>
+</div>
+  <!-- Skeleton screen -->
+  <div *ngIf="data.loading">
+    <div class="ion-padding custom-skeleton">
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>
+          <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+        </ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-skeleton-text animated style="width: 27px; height: 27px" slot="start"></ion-skeleton-text>
+        <ion-label>
+          <h3>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

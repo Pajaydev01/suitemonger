@@ -1,0 +1,52 @@
+<ion-content id="reciept">
+  <div class="" *ngIf="!datas.loading">
+  <div>
+    <p class="font-nic font-low align-center">Booking successful! </p>
+  </div>
+  <div class="center-flex">
+    <div class="img_con"></div>
+  </div>
+  <div class="mg-y-rm-sm">
+    <h1 class="font-tinos align-center">{{data?.details?.name}}</h1>
+  </div>
+  <div class="padd mg-y-rm">
+  <div class="flex-full">
+    <p class="font-mont font-small">Booking id:</p>
+    <p class="font-mont font-small"><strong>{{data?.booking_id}}</strong></p>
+  </div>
+  <div class="flex-full">
+    <p class="font-mont font-small">Selected Suite: </p>
+    <p class="font-mont font-small"><strong>{{data?.data?.prices[0]?.category}}</strong></p>
+  </div>
+  <div class="flex-full">
+    <p class="font-mont font-small">Check in day | time:  </p>
+    <p class="font-mont font-small"><strong>{{data?.data?.day}} | {{data?.data?.time}}</strong></p>
+  </div>
+  <div class="flex-full">
+    <p class="font-mont font-small">Duration:  </p>
+    <p class="font-mont font-small"><strong>{{data?.data?.counter}} day(s)</strong></p>
+  </div>
+  <div class="flex-full">
+    <p class="font-mont font-small">Number of suites or rooms:  </p>
+    <p class="font-mont font-small"><strong>{{data?.data?.suiteCount}}</strong></p>
+  </div>
+  <div class="flex-full">
+    <p class="font-mont font-small">Amount payed (excluding service charges)</p>
+    <p class="font-mont font-small"><strong>{{data?.total}}</strong></p>
+  </div>
+  </div>
+  <!-- <div>
+    <ion-list lines="none">
+      <ion-item>
+        <div class="button-lg align-center" (click)="save('reciept')">
+          Share reciept
+        </div>
+      </ion-item>
+      </ion-list>
+  </div> -->
+</div>
+<div class="center-flex" *ngIf="datas.loading">
+  <div class="loading">
+  </div>
+</div>
+</ion-content>

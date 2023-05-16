@@ -1,0 +1,18 @@
+<ion-app>
+  <ion-header class="ion-no-border">
+  <ion-toolbar>
+      <ion-button color="light" size="medium" (click)="close()">Use map marker</ion-button>
+  </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  <ion-item class="animate__animated">
+    <ion-label>Enter your destination: </ion-label>
+    <ion-input class="font-mont" placeholder="Enter where you are headed for" [(ngModel)]="data.input"></ion-input>
+    </ion-item>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+        <ion-button size="medium" expand="full" (click)="proceed()">Proceed</ion-button>
+  </ion-toolbar>
+</ion-footer>

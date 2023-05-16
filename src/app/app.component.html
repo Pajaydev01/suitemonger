@@ -1,0 +1,7 @@
+<ion-app>
+  <p-dialog [header]="action.data.dialogue.header" [(visible)]="action.data.dialogue.visible" [style]="{width: '80vw', backgroundColor:'coral', color:'white'}">
+    <p [innerHTML]="action.data.dialogue.body">
+    </p>
+</p-dialog>
+  <ion-router-outlet></ion-router-outlet>
+</ion-app>

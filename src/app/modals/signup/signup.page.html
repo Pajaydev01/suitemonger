@@ -1,0 +1,74 @@
+<ion-app>
+  <p-toast></p-toast>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="flex-full">
+      <div (click)="close()"><ion-icon name="arrow-back-outline"></ion-icon></div>
+      <div>  <ion-title class="font-mont">Signup</ion-title></div>
+        <div class=""></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<div class="animate__animated">
+  <div class="p-g">
+  <div>
+    <h5 class="font-mont font-small font-native">Firstname:</h5>
+  <span class="p-input-icon-left">
+      <i class="pi pi-user"></i>
+      <input type="text" pInputText placeholder="e.g John..." [(ngModel)]="data.user.firstname" class="font-mont" class="font-native"/>
+  </span>
+  </div>
+
+  <div>
+    <h5 class="font-mont font-small font-native">Other names:</h5>
+  <span class="p-input-icon-left">
+      <i class="pi pi-user"></i>
+      <input type="text" pInputText placeholder="e.g John..." [(ngModel)]="data.user.othername"  class="font-mont" class="font-native"/>
+  </span>
+  </div>
+
+  <div>
+    <h5 class="font-mont font-small font-native">Email Address:</h5>
+  <span class="p-input-icon-left">
+      <i class="pi pi-at"></i>
+      <input pInputText type="email" placeholder="e.g @yourmail.com" [(ngModel)]="data.user.email" class="font-mont" class="font-native"/>
+  </span>
+  </div>
+
+  <div>
+    <h5 class="font-mont font-small font-native">Phone:</h5>
+  <span class="p-input-icon-left">
+      <i class="pi pi-phone"></i>
+      <input pInputText type="number" placeholder="e.g +123***" [(ngModel)]="data.user.phone" class="font-mont" class="font-native"/>
+  </span>
+  </div>
+
+  <div>
+    <h5 class="font-mont font-small font-native">Set password:</h5>
+  <span class="p-input-icon-left">
+      <i class="pi pi-lock"></i>
+      <input pInputText type="password" placeholder="......" [(ngModel)]="data.user.pass1" class="font-mont" class="font-native"/>
+  </span>
+  </div>
+
+  <div>
+    <h5 class="font-mont font-small font-native">Confirm password:</h5>
+  <span class="p-input-icon-left">
+      <i class="pi pi-lock"></i>
+      <input pInputText type="password" placeholder="......" [(ngModel)]="data.user.password" class="font-mont" class="font-native"/>
+  </span>
+  </div>
+</div>
+          <!-- <ion-button expand="full" size="medium" (click)="submit()">Proceed</ion-button> -->
+          <div class="button-lg center-flex" (click)="submit()">
+            <div>Proceed</div>
+              <div  class="load-bt mg-l" *ngIf="data?.loading"></div>
+          </div>
+          <p class="align-center" (click)="login( )">Go to Sign in</p>
+</div>
+</ion-content>
+
+</ion-app>

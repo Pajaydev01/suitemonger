@@ -1,0 +1,89 @@
+ion-app{
+  .wrap {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bg {
+    opacity: 0.1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .content {
+    position: relative;
+  }
+
+  .b-g-red{
+    background-color: red;
+    color:white;
+  }
+    .imgs{
+      width: 100%;
+      height: 90px;
+      object-fit: cover;
+    }
+
+
+
+  .scroll-x {
+      width: 100%;
+      white-space: nowrap;
+      overflow-x: auto;
+
+      .category {
+          display: inline-block;
+          margin: 0 3.5px;
+
+          .category_img {
+              width: 100px;
+              height: 127px;
+              border-radius: 11px;
+          }
+
+          &:first-child {
+              margin-left: 15px;
+          }
+
+          &:last-child {
+              margin-right: 15px;
+          }
+      }
+  }
+  .d-none{
+    display: none;
+  }
+  .h-r{
+    height:50%;
+  }
+  .d-flex{
+    display:flex;
+  }
+  .p-g{
+    padding:10px;
+  }
+  .search-bar{
+    width: 80%;
+    border:1px solid black;
+    border-radius:20px 20px 20px 20px;
+    padding-left: 10px;
+    padding-right:15px;
+    padding-top:-15px;
+    padding-bottom: -10px;
+  }
+  .search-bar-g{
+    width: auto;
+    border:1px solid black;
+    border-radius:20px 20px 20px 20px;
+    padding-left: 14px;
+    padding-right:19px;
+    padding-top:-15px;
+    padding-bottom: -10px;
+  }
+  .visible{
+    display: none;
+  }
+}

@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="font-mont align-center">Leave a review</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <div class="marg">
+  <ion-label  position="stacked" color="dark" class="font-mont font-low">What was your experience like?</ion-label>
+  <div class="flex-full">
+    <!-- display emojis to choose from -->
+    <div class="box" (click)="change('Happy')" [ngClass]="(data.feel=='Happy')?'box-w':'box'">
+    <p class="font-mont font-low"> 😍 Happy</p>
+    </div>
+    <div class="box" (click)="change('Normal')" [ngClass]="(data.feel=='Normal')?'box-w':'box'">
+    <p class="font-mont font-low">😑 Normal</p>
+    </div>
+    <div class="box" (click)="change('Bad')" [ngClass]="(data.feel=='Bad')?'box-w':'box'">
+    <p class="font-mont font-low">😡 Bad</p>
+    </div>
+    </div>
+    </div>
+
+    <ion-item>
+      <ion-textarea [(ngModel)]="data.comment" placeholder="Enter your comment..."></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <div class="button-lg align-center" (click)="proceed()">
+          Submit
+        </div>
+        </ion-item>
+  </ion-list>
+</ion-content>

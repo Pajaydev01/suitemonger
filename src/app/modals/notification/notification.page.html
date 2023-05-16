@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="font-mont font-low align-center">{{data?.result?.from}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="font-mont font-low pad-g">
+  <p [innerHTML]="data?.result?.message">
+  </p>
+</div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-list>
+      <ion-item><a class="button-lg align-center font-mont font-low" (click)="close()">Close</a></ion-item>
+    </ion-list>
+    </ion-toolbar>
+  </ion-footer>

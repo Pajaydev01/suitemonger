@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-title class="font-mont">Add money to you wallet</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!data.loading">
+    <ion-list>
+    <ion-item *ngIf="!data.process">
+  <ion-label position="stacked" color="dark">Amount</ion-label>
+<ion-input  type="number" [(ngModel)]="data.amount" placeholder="100 - 1000.." class="font-mont font-native"></ion-input>
+</ion-item>
+<ion-item>
+  <div class="align-center button-lg" (click)="processPay()" *ngIf="action.getItem()=='rave'">
+Recharge
+  </div>
+  <ng-container *ngIf="action.getItem()=='paystack'">
+  <div class="align-center button-lg" (click)="processPay()" *ngIf="!data.process" >
+Recharge
+  </div>
+  </ng-container>
+
+<ng-container *ngIf="data.process"  >
+<div
+  angular4-paystack
+  [paystackOptions]="option"
+  (paymentInit)="paymentInit($event)"
+  (onClose)="closedPaymentModal()"
+  (callback)="paymentDone($event)"
+  class="button-lg align-center">
+Pay with Paystack
+</div>
+</ng-container>
+  </ion-item>
+  </ion-list>
+</div>
+<div class="" *ngIf="data.loading" >
+  <div class="center-flex">
+    <div class="loading">
+
+    </div>
+  </div>
+</div>
+</ion-content>

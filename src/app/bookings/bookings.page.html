@@ -1,0 +1,93 @@
+<ion-app>
+  <ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-title class="font-mont">Bookings</ion-title>
+      <div class="p-r" *ngIf="data?.result?.length>0" ><ion-text slot="end" class="font-mont">Total items: {{data?.result?.length}}</ion-text></div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-segment (ionChange)="segmentChanged()" color="medium" value="saved" #segment mode="ios">
+  <ion-segment-button value="saved">
+    <ion-label class="font-small font-mont">Saved</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="0">
+    <ion-label class="font-small font-mont">Pending</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="1">
+    <ion-label class="font-small font-mont">Active</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="2">
+    <ion-label class="font-small font-mont">Finished</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="3">
+    <ion-label class="font-small font-mont">Cancelled</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+
+<div *ngIf="!data.loading" >
+  <p class="align-center font-mont font-low animate__animate" *ngIf="data?.empty || data?.result?.length==0">
+You have no {{process(data.current)}} items
+  </p>
+  </div>
+<div *ngIf="data.loading==false"  class="animate__animate">
+  <div class="" *ngIf="!data?.empty || data?.result?.length>0" >
+  <p class="font-mont font-small align-center" >Swipe each item left or right for actions</p>
+    <ion-card *ngFor="let item of data.result">
+      <ion-card-header>
+      <ion-item-sliding>
+       <ion-item-options side="start" *ngIf="data.current=='saved'">
+         <ion-item-option color="danger" expandable (click)="delete(item)">
+           Delete
+         </ion-item-option>
+       </ion-item-options>
+
+       <ion-item>
+  <ion-label class="ion-text-wrap">
+    <ion-text class="font-mont font-low">
+      <h3>Name: <span> <strong>{{item.name}}</strong></span></h3>
+    </ion-text>
+    <p class="font-mont font-low">Number of rooms/appartment booked: <span> <strong>{{item.suiteCount}}</strong></span></p>
+    <p class="font-mont font-low">Number of days: <span> <strong>{{item.counter}} days</strong></span></p>
+    <ion-text class="font-mont font-low">
+      <p>Check-in Date: <span> <strong>{{item.day}}</strong></span> | Time: <span> <strong>{{item.time}}</strong></span></p>
+    </ion-text>
+    <ion-text class="font-mont font-low">
+      <p>Price: <span><strong>{{item.total | currency: item.currency:'symbol-narrow'}}</strong></span></p>
+    </ion-text>
+  </ion-label>
+</ion-item>
+
+       <ion-item-options side="end">
+         <ion-item-option color="light" expandable (click)="view(item)">
+           View
+         </ion-item-option>
+       </ion-item-options>
+     </ion-item-sliding>
+     </ion-card-header>
+     </ion-card>
+  </div>
+  </div>
+  <div class="animate__animate" *ngIf="data.loading==false && data.current=='booked'" >
+
+  </div>
+
+  <div class="animate__animate" *ngIf="data.loading==false && data.current=='active'" >
+
+  </div>
+
+  <div class="animate__animate" *ngIf="data.loading==false && data.current=='finished'" >
+
+  </div>
+
+<div class="center-flex" *ngIf="data.loading" >
+  <div class="loading">
+
+  </div>
+</div>
+
+</ion-content>
+  </ion-app>

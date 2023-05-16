@@ -1,0 +1,72 @@
+<ion-app>
+  <ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-title class="font-mont">Notifications</ion-title>
+      <div class="mg-r">
+      <ion-text slot="end" *ngIf="!data.loading"><p class="font-mont font-native font-small">Unread: {{data?.count}}</p>
+        </ion-text>
+        </div>
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-header>
+<ion-content>
+  <div class="center-flex" *ngIf="data.loading">
+    <div class="loading"></div>
+  </div>
+
+  <!-- manage read and unread notifications here -->
+
+  <div class="" *ngIf="!data.loading">
+    <p class="font-mont font-small align-center">Swipe left to view</p>
+    <p class="font-mont font-small mg-l font-fade align-center"><strong>UNREAD</strong></p>
+  <ion-list *ngFor="let item of data?.result?.unread; let i=index;" color='primary'>
+    <ion-item-sliding>
+     <ion-item>
+  <ion-text>
+    <div class="font-mont font-small font-native">
+        {{item.date}} : {{item.time}}
+    </div>
+  <div class="font-mont font-small">
+<strong>{{item.from}}</strong>
+  </div>
+    </ion-text>
+</ion-item>
+     <ion-item-options side="end">
+       <ion-item-option color="light" expandable (click)="view(item,'unread')">
+         View
+       </ion-item-option>
+     </ion-item-options>
+   </ion-item-sliding>
+  </ion-list>
+  <div class="" *ngIf="data?.result?.unread?.length==0">
+  <p class="font-mont font-small font-native mg-l">You do not have any unread notifications</p>
+  </div>
+
+  <p class="font-mont font-small mg-l font-fade align-center"><strong>CHECKED</strong></p>
+<ion-list *ngFor="let item of data?.result?.read; let i=index;"  >
+  <ion-item-sliding>
+    <ion-item>
+    <ion-text>
+      <div class="font-mont font-small font-native">
+          {{item.date}} : {{item.time}}
+      </div>
+    <div class="font-mont font-small">
+  <strong>{{item.from}}</strong>
+    </div>
+      </ion-text>
+      </ion-item>
+   <ion-item-options side="end">
+     <ion-item-option color="light" expandable (click)="view(item,'checked')">
+       View
+     </ion-item-option>
+   </ion-item-options>
+ </ion-item-sliding>
+</ion-list>
+<div class="" *ngIf="data?.result?.read?.length==0">
+<p class="font-mont font-small font-native align-center mg-l">You do not have any checked notifications</p>
+</div>
+  </div>
+</ion-content>
+</ion-app>

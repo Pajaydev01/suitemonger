@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Suitemonger</string>
+    <string name="title_activity_main">Suitemonger</string>
+    <string name="package_name">com.suitemonger.io</string>
+    <string name="custom_url_scheme">com.suitemonger.io</string>
+</resources>

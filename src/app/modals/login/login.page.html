@@ -1,0 +1,42 @@
+<ion-app>
+  <p-toast></p-toast>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="flex-full">
+      <div (click)="close()"><ion-icon name="arrow-back-outline"></ion-icon></div>
+      <div>  <ion-title class="font-mont">Login</ion-title></div>
+        <div class=""></div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white-content">
+
+<div class="animate__animated p-g">
+
+  <div>
+  <h5 class="font-mont font-small font-native">Email:</h5>
+<span class="p-input-icon-left p-float-label">
+    <i class="pi pi-at"></i>
+    <input type="email" pInputText placeholder="Email address" [(ngModel)]="data.user.user" />
+</span>
+</div>
+
+<div>
+  <h5 class="font-mont font-small font-native">Password:</h5>
+  <span class="p-input-icon-left">
+      <i class="pi pi-lock"></i>
+      <input type="password" pInputText placeholder="******" [(ngModel)]="data.user.password" />
+  </span>
+</div>
+          <!-- <ion-button expand="full" size="medium" (click)="submit()">Sign in</ion-button> -->
+          <div class="button-lg center-flex" (click)="submit()">
+            <div>Sign in</div>
+              <div  class="load-bt mg-l" *ngIf="data?.loading"></div>
+          </div>
+          <!-- use normal button to replace all the ion-buttons -->
+          <p class="align-center" (click)="signup()">Sign up!</p>
+</div>
+</ion-content>
+
+</ion-app>

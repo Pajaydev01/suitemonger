@@ -1,0 +1,18 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-title ><div (click)="action.modal.dismiss()"><ion-icon name="arrow-back-outline"></ion-icon></div></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="marg">
+  <ion-item class="">
+    <img src="{{data.item.icon}}" alt="" class="icon"/>
+        <p><strong>{{data.item.name}}</strong></p>
+  </ion-item>
+  <div class="font-mont">
+    <p class="font-small"><strong>Review : </strong>{{data.item.feel}}</p>
+    <p class="white">{{data.item.comment}}</p>
+  </div>
+</div>
+</ion-content>

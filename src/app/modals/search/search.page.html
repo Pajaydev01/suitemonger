@@ -1,0 +1,67 @@
+<ion-app>
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-title class="font-mont" (click)="close()"><ion-icon name="arrow-back-outline"></ion-icon> Search</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #modals>
+<div class="animate__animated">
+  <ion-list lines="none">
+
+    <ion-radio-group>
+               <ion-list-header *ngIf="data.search.input2=='' || data.search.input2==undefined">
+                 <ion-label>Where do you want to search</ion-label>
+               </ion-list-header>
+               <ion-item *ngIf="data.search.input2=='' || data.search.input2==undefined">
+                 <ion-label>Categories</ion-label>
+                 <ion-radio slot="start" color="danger" (click)="choose('category')"></ion-radio>
+               </ion-item>
+
+               <ion-item *ngIf="data.search.input2=='' || data.search.input2==undefined">
+                 <ion-label>Houses</ion-label>
+                 <ion-radio slot="start" color="danger" (click)="choose('houses')"></ion-radio>
+               </ion-item>
+
+               <ion-item>
+                 <ion-label>Search anything (with suggestions)</ion-label>
+                 <ion-radio slot="start" color="danger" (click)="choose('all')"></ion-radio>
+               </ion-item>
+             </ion-radio-group>
+
+<div [ngClass]="(data?.selected)?'animate__animated':'none'">
+      <ion-item *ngIf="data.type=='houses'">
+        <ion-label>Pick a category: </ion-label>
+        <ion-select placeholder="Select house category" interface="action-sheet" [(ngModel)]="data.search.category">
+          <ion-select-option value="{{item.id}}" *ngFor="let item of data.categories"  >{{item.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item *ngIf="data.type!=='all'" >
+          <ion-label>Search query: </ion-label>
+          <ion-input class="font-mont" placeholder="Enter what you're looking for" [(ngModel)]="data.search.input"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="data.type=='all'" >
+            <ion-label>Search query: </ion-label>
+            <ion-input class="font-mont" placeholder="Enter what you're looking for" [(ngModel)]="data.search.input2" (ionChange)="filter($event)" debounce="0"></ion-input>
+            </ion-item>
+          </div>
+    </ion-list>
+        <ion-list>
+          <div class="" *ngIf="data?.result?.length>0 && data?.type=='all'" class="animate__animated">
+            <i class="font-mont font-small">#click on any of the result for details</i>
+            <div class="" *ngFor="let item of data.result; let i=index;" >
+              <ion-item class="font-mont font-low font-native" (click)="view(item)">Name: {{item.name}} | Type: {{(item.prices==undefined)?'Category':'House'}}</ion-item>
+            </div>
+          </div>
+              </ion-list>
+</div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+      <ion-button color="light" size="medium" (click)="proceed()" expand="full" *ngIf="data.type!=='all'">Proceed</ion-button>
+  </ion-toolbar>
+</ion-footer>
+</ion-app>

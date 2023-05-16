@@ -1,0 +1,71 @@
+<ion-header mode="md">
+<ion-toolbar>
+  <ion-buttons>
+    <ion-back-button defaultHref="home"></ion-back-button>
+    <ion-title class="font-mont">Profile</ion-title>
+    <ion-text slot="end" *ngIf="data.loading===false" class="font-mont font-small mg-r">Account status: <span><strong>{{setStat(data.stat)}}</strong></span></ion-text>
+      </ion-buttons>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="center-grid p-g animate__animated">
+    <p class="font-small align-center">Click image to change</p>
+<div class="" (click)="pickSingleImage()" [ngStyle]="{'background-image': 'url('+data?.user?.avatar_link+')', 'background-size':'cover', 'background-repeat':'no-repeat', 'background-postition':'center','width':'200px', 'height':'200px', 'border-radius':'15px'}">
+</div>
+</div>
+
+<div class="animate__animated">
+  <div class="p-g">
+    <div>
+      <h5 class="font-mont font-small font-native">Firstname:</h5>
+    <span class="p-input-icon-left">
+        <i class="pi pi-user"></i>
+        <input type="text" pInputText placeholder="e.g John..." [(ngModel)]="data.user.firstname" class="font-mont" class="font-native"/>
+    </span>
+    </div>
+  
+    <div>
+      <h5 class="font-mont font-small font-native">Other names:</h5>
+    <span class="p-input-icon-left">
+        <i class="pi pi-user"></i>
+        <input type="text" pInputText placeholder="e.g John..." [(ngModel)]="data.user.othername"  class="font-mont" class="font-native"/>
+    </span>
+    </div>
+  
+    <div>
+      <h5 class="font-mont font-small font-native">Email Address:</h5>
+    <span class="p-input-icon-left">
+        <i class="pi pi-at"></i>
+        <input pInputText type="email" placeholder="e.g @yourmail.com" [(ngModel)]="data.user.email" class="font-mont" class="font-native"/>
+    </span>
+    </div>
+  
+    <div>
+      <h5 class="font-mont font-small font-native">Phone:</h5>
+    <span class="p-input-icon-left">
+        <i class="pi pi-phone"></i>
+        <input pInputText type="number" placeholder="e.g +123***" [(ngModel)]="data.user.phone" class="font-mont" class="font-native"/>
+    </span>
+    </div>
+  </div>
+  
+  <ion-list lines="none">
+            <ion-item><a class="button-lg align-center font-mont font-low" (click)="update('details','','')">Update</a></ion-item>
+          </ion-list>
+</div>
+
+<!-- check for profile verification here -->
+
+<div class="center-flex animate__animate" *ngIf="data.loading">
+<div class="loading"></div>
+</div>
+
+<div class="" *ngIf="data.loading==false && data.stat==0" >
+  <p class="align-center font-mont"><strong>Dear {{data.user.firstname}}</strong></p>
+  <p class="align-center font-small">Kindly proceed to verify your account to make full use of this platform</p>
+  <div class="">
+    <ion-button expand="full" color="light" (click)="openVerify()">Proceed</ion-button>
+  </div>
+</div>
+</ion-content>

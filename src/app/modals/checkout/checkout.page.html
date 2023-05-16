@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="font-mont font-low align-center">Check out and booking details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-white-content">
+<div class="">
+  <ion-list>
+    
+    <ion-item>
+      
+        <ion-label>Check in date:</ion-label>
+        <ion-note slot="end"><strong>{{data?.all?.data?.day}}</strong></ion-note>
+      
+    </ion-item>
+    
+      <ion-item>
+        
+          <ion-label>Check in time:</ion-label>
+          <ion-note slot="end">
+            <strong>{{data?.all?.data?.time}}</strong>
+          </ion-note>
+        
+      </ion-item>
+      
+        <ion-item>
+          
+            <ion-label>Number of Suites:</ion-label>
+            <ion-note slot="end">
+              <strong>{{data?.all?.data?.suiteCount}}</strong>
+            </ion-note>
+          
+        </ion-item>
+        
+        <ion-item>
+          
+            <ion-label>Number of days (duration):</ion-label>
+            <ion-note slot="end">
+              <strong>{{data?.all?.data?.counter}}</strong>
+            </ion-note>
+          
+        </ion-item>
+        
+        <ion-item>
+          
+            <ion-label>Selected Suite:</ion-label>
+            <ion-note slot="end">
+              <strong>{{data?.all?.data?.prices[0]?.category}}</strong>
+            </ion-note>
+          
+        </ion-item>
+        
+        <ion-item>
+          
+            <ion-label>Total: </ion-label>
+            <ion-note slot="end">
+              <strong>{{data?.all?.total | currency: data?.all?.currency:'symbol-narrow'}}</strong>
+              </ion-note>
+            
+          </ion-item>
+        
+          <ion-item>
+            
+              <ion-label>Service charges: </ion-label>
+              <ion-note slot="end">
+                <strong>{{data?.all?.service_charge | currency: data?.all?.currency:'symbol-narrow'}}</strong>
+                </ion-note>
+              
+            </ion-item>
+        
+          <ion-item>
+            
+              <ion-label>Total payment: </ion-label>
+              <ion-note slot="end">
+                <strong>{{data?.all?.grand | currency: data?.all?.currency:'symbol-narrow'}}</strong>
+              </ion-note>
+            
+          </ion-item>
+        </ion-list>    
+</div>
+<div class="flex-full">
+<ion-button color="danger" (click)="go(false)">Cancel</ion-button>
+<ion-button (click)="go(true)">Proceed</ion-button>
+</div>
+</ion-content>
