@@ -9,12 +9,12 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import {getAuth, initializeAuth, provideAuth, indexedDBLocalPersistence } from '@angular/fire/auth';
+import { getFirestore, provideFirestore, enableIndexedDbPersistence} from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { FlutterwaveModule } from "flutterwave-angular-v3"
-import { Angular4PaystackModule } from 'angular4-paystack';
+//import { Angular4PaystackModule } from 'angular4-paystack';
 import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
 import { Toast } from '@awesome-cordova-plugins/toast/ngx';
 import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
@@ -30,6 +30,7 @@ import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { DialogModule } from 'primeng/dialog';
+import {Capacitor} from '@capacitor/core';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -46,11 +47,25 @@ import { DialogModule } from 'primeng/dialog';
     // AngularFireAuthModule,
     // AngularFireStorageModule,
     // AngularFireDatabaseModule
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth()),
-    provideStorage(() => getStorage()),
-    Angular4PaystackModule.forRoot('pk_test_xxxxxxxxxxxxxxxxxxxxxxxx'),
+    // provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    // provideFirestore(() => getFirestore()),
+     provideAuth(() => getAuth()),
+     provideStorage(() => getStorage()),
+    provideFirebaseApp(() => {
+      const app = initializeApp(environment.firebaseConfig);
+      if (Capacitor.isNativePlatform) {
+        initializeAuth(app, {
+          persistence: indexedDBLocalPersistence
+        });
+      }
+      return app;
+    }),
+    provideFirestore(() => {
+      const firestore = getFirestore();
+      enableIndexedDbPersistence(firestore);
+      return firestore;
+    }),
+    //Angular4PaystackModule.forRoot('pk_test_xxxxxxxxxxxxxxxxxxxxxxxx'),
     //  provideAnalytics(() => getAnalytics()),
     NgImageSliderModule,
   ],

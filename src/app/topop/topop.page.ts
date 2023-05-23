@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActionsService } from '../services/actions.service'
 import { FireServiceService } from '../services/fire-service.service';
 import { Flutterwave, InlinePaymentOptions, PaymentSuccessResponse } from "flutterwave-angular-v3"
-import { PaystackOptions } from 'angular4-paystack';
+//import { PaystackOptions } from 'angular4-paystack';
 @Component({
   selector: 'app-topop',
   templateUrl: './topop.page.html',
@@ -10,13 +10,13 @@ import { PaystackOptions } from 'angular4-paystack';
 })
 export class TopopPage implements OnInit {
   data: any = {};
-  option: PaystackOptions = {
-    amount: 1000,
-    email: 'holl@gmail.com',
-    // ref: `${Math.ceil(Math.random() * 10e10)}`
-    ref: this.action.generateId(),
-    key: this.action.data.p_key,
-  }
+  // option: PaystackOptions = {
+  //   amount: 1000,
+  //   email: 'holl@gmail.com',
+  //   // ref: `${Math.ceil(Math.random() * 10e10)}`
+  //   ref: this.action.generateId(),
+  //   key: this.action.data.p_key,
+  // }
   constructor(
     private provider: FireServiceService,
     public action: ActionsService,
@@ -69,15 +69,15 @@ export class TopopPage implements OnInit {
 
   //process payment for paystack here
   initiate() {
-    if (this.data.amount === undefined || this.data.amount == '0') {
-      this.action.Toast('Please enter a valid amount', 'top');
-    }
-    else {
-      const user = JSON.parse(localStorage.getItem('user_data'));
-      this.option.amount = this.data.amount * 100
-      this.option.email = user.email
-      this.data['process'] = true
-    }
+    // if (this.data.amount === undefined || this.data.amount == '0') {
+    //   this.action.Toast('Please enter a valid amount', 'top');
+    // }
+    // else {
+    //   const user = JSON.parse(localStorage.getItem('user_data'));
+    //   this.option.amount = this.data.amount * 100
+    //   this.option.email = user.email
+    //   this.data['process'] = true
+    // }
   }
 
 

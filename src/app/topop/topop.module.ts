@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TopopPageRoutingModule } from './topop-routing.module';
 import { TopopPage } from './topop.page';
-import { Angular4PaystackModule } from 'angular4-paystack';
+//import { Angular4PaystackModule } from 'angular4-paystack';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import { Angular4PaystackModule } from 'angular4-paystack';
     FormsModule,
     IonicModule,
     TopopPageRoutingModule,
-    Angular4PaystackModule.forRoot('pk_test_xxxxxxxxxxxxxxxxxxxxxxxx')
+  //  Angular4PaystackModule.forRoot('pk_test_xxxxxxxxxxxxxxxxxxxxxxxx')
   ],
   declarations: [TopopPage]
 })
