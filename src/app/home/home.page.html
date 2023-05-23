@@ -1,4 +1,5 @@
 <ion-app>
+  
   <!-- side menu -->
   <ion-menu side="start" menuId="first" contentId="main" mode="md">
   <ion-header class="ion-no-border">
@@ -35,6 +36,8 @@
     </ion-toolbar>
   </ion-footer>
 </ion-menu>
+<!-- side menu ends here -->
+
   <ion-router-outlet id="main" ></ion-router-outlet>
 <ion-header [translucent]="true" class="ion-no-border" *ngIf="data.active">
   <ion-toolbar mode="md">
@@ -59,13 +62,13 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-header *ngIf="!data.active">
+<!-- <ion-header *ngIf="!data.active">
   <ion-toolbar mode="md">
     <ion-title>
       <p class="font-nic font-small align-center">Sign in to explore</p>
     </ion-title>
     </ion-toolbar>
-</ion-header>
+</ion-header> -->
 <ion-content [fullscreen]="true">
 <div *ngIf="data.success" class="animate__animated">
       <div class="bg-white ">
@@ -99,12 +102,12 @@
             </div>
 
         <!-- search pane here -->
-        <div class="center-flex p-g">
-        <div class="bg-native search-bar center-flex" (click)="search()">
+        <!-- <div class="center-flex p-g"> -->
+        <!-- <div class="bg-native search-bar center-flex" (click)="search()"> -->
           <!-- <div><ion-icon name="search-outline"></ion-icon></div> -->
-          <div><p class="font-low font-mont">Search for anything</p></div>
-        </div>
-        </div>
+          <!-- <div><p class="font-low font-mont">Search for anything</p></div> -->
+        <!-- </div> -->
+        <!-- </div> -->
          <!-- <div class="center-flex" (click)="search()">
         <div class="search">Search anything</div>
         </div> -->

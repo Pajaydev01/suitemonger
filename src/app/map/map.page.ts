@@ -21,7 +21,7 @@ export class MapPage implements OnInit {
 
   ionViewWillEnter() {
     this.loadMapNorm()
-    this.loadSearch();
+    //this.loadSearch();
   }
   loadMapNorm() {
     this.action.loadMap().then((res: any) => {

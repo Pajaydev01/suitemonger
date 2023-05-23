@@ -34,11 +34,11 @@ export class SignupPage implements OnInit {
     let { data } = this;
     let user = data.user;
     if (user.firstname === "" || user.othername === "" || user.email === "" || user.phone === "" || user.pass1 === "" || user.password === "") {
-      this.action.toaster('warn','Kindly fill all fields', 'Incomplete field');
+      this.action.Toast('Kindly fill all fields','top');
     }
     else {
       if (user.password !== user.pass1 || user.password !== user.pass1) {
-        this.action.toaster('warn','Kindly check to ensure that you entered a matching password','Password error');
+        this.action.Toast('Kindly check to ensure that you entered a matching password','top');
       }
       else {
         this.data['loading']=true;
@@ -55,7 +55,7 @@ export class SignupPage implements OnInit {
           }
           else {
             this.data['loading']=false;
-            this.action.toaster('error', 'Sorry, the entered phone number or mail exists','Error signing up')
+            this.action.Toast('Sorry, the entered phone number or mail exists','top')
             //this.action.LoadStop();
           }
         }).catch(err => {
@@ -103,7 +103,7 @@ export class SignupPage implements OnInit {
             else {
             //  this.action.LoadStop();
             this.data['loading']=false;
-              this.action.toaster('error', this.data.res.data.status);
+              this.action.Toast(this.data.res.data.status,'bottom');
              // console.log(this.data.res.data.message)
             }
           }).catch(err => {

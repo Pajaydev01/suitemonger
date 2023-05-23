@@ -25,6 +25,7 @@ import { DomSanitizer} from '@angular/platform-browser';
 import { AndroidFullScreen } from '@awesome-cordova-plugins/android-full-screen/ngx';
 import { ImagePicker,ImagePickerOptions } from '@awesome-cordova-plugins/image-picker/ngx';
 import {ConfirmationService,MessageService} from 'primeng/api';
+import { Keyboard } from '@capacitor/keyboard';
 @Injectable({
   providedIn: 'root'
 })
@@ -109,6 +110,26 @@ export class ActionsService {
     this.status.styleBlackOpaque();
    this.status.overlaysWebView(false);
   this.status.backgroundColorByHexString("#FF7F50");
+  }
+
+
+  //show keyboard here
+  keyboardCtrl=(action:string)=>{
+switch (action) {
+  case 'show':
+    Keyboard.show();
+    break;
+    case 'hide':
+      Keyboard.addListener('keyboardWillShow', info => {
+       // console.log(info)
+       Keyboard.hide();
+      });
+      break;
+      case 'remove':
+        Keyboard.removeAllListeners();
+  default:
+    break;
+}
   }
 
   backer=()=>{

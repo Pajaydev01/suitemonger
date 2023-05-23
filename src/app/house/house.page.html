@@ -210,14 +210,13 @@
     </div>
     </div>
     <p-divider></p-divider>
-    <div class="font-mont" *ngIf="data.dateTime!==undefined" >
+    <!-- <div class="font-mont" *ngIf="data.dateTime!==undefined" >
       <p class="align-center font-small"><strong>Scheduled Date: {{data?.user?.day}} | Scheduled Time: {{data?.user?.time}}</strong></p>
-    </div>
-    <p class="font-mont font-small font-native align-center">Select lodge Day/time</p>
+    </div> -->
     <div class="center-flex">
     <!-- <ion-button id="open-modal" color="light">Select lodge Day/time</ion-button> -->
     <!-- <div class="button-lg-wh align-center" id="open-modal" >Select lodge Day/time</div> -->
-    <p-calendar [(ngModel)]="data.dateTemp"  (onSelect)="confirm($event)" [showTime]="true" aria-label="Set date and time" ></p-calendar>
+    <p-calendar [(ngModel)]="data.dateTemp" (click)="action.keyboardCtrl('hide')" (onSelect)="confirm($event)" [showTime]="true" [showIcon]="true" placeholder="Select lodge Day/time"></p-calendar>
         </div>
         <div class="font-mont list-native" *ngIf="data?.result?.rules!=undefined">
           <!-- <ion-list lines="none">

@@ -67,6 +67,7 @@ export class HousePage implements OnInit {
   ionViewDidLeave() {
     this.data.getter.unsubscribe();
     this.action.exitfullscreen();
+    this.action.keyboardCtrl('remove')
   }
   loadHouse = (id) => {
     if (typeof id == 'string') {
@@ -251,6 +252,7 @@ export class HousePage implements OnInit {
     this.data.user['day']=date;
     //this.data.user['time'] = this.action.formatTime(this.data.dateTemp);
     this.data.user['time']=time;
+    this.action.keyboardCtrl('remove');
   }
 
   //proceed with thier bookings here and first lload a confirm component

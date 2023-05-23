@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
         if (res.empty) {
           this.data['loading']=false;
           this.action.LoadStop();
-          this.action.alerter('Invalid login', 'The email or phone number not registered');
+          this.action.Toast('The email or phone number not registered','top');
         }
         else {
           //get the password from the field and check
@@ -58,7 +58,7 @@ export class LoginPage implements OnInit {
             if (this.data.spass !== sha1(user.password)) {
               //this.action.LoadStop();
              // this.action.alerter('Failed', 'Incorrect password');
-             this.action.toaster('error','Incorrect password','Failed to login')
+             this.action.Toast('Incorrect password','top')
             }
             else {
               this.action.LoadStop();
@@ -71,7 +71,7 @@ export class LoginPage implements OnInit {
       }).catch(err => {
         this.data['loading']=false;
         this.action.LoadStop();
-        this.action.alerter('Error', 'An error occured, please try again');
+        this.action.Toast('An error occured, please try again','bottom');
       })
 
     }
